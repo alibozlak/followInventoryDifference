@@ -24,10 +24,13 @@ public class Product(
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "product_id")
-    private var productId : Int = -1
+    private var productId : UInt = 0u
 
     @ColumnInfo(name = "inventory_difference")
-    private var inventoryDifference : Double? = null
+    private var inventoryDifference : Double? = 0.0
+
+    @ColumnInfo(name = "last_product_inventory_date_and_time")
+    private var lastProductInventoryDateAndTime : String? = null
 
     @ColumnInfo(name = "short_code")
     private var shortCode: String? = null
