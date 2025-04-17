@@ -20,20 +20,17 @@ public class Product(
     private var currentPrice : Double?,
 
     @ColumnInfo(name = "tax")
-    private var tax : UByte?
+    private var tax : Byte?
 ) {
     @PrimaryKey(autoGenerate = true)
     @ColumnInfo(name = "product_id")
-    private var productId : UInt = 0u
+    private var productId : Int = 0
 
     @ColumnInfo(name = "inventory_difference")
     private var inventoryDifference : Double? = 0.0
 
     @ColumnInfo(name = "last_product_inventory_date_and_time")
     private var lastProductInventoryDateAndTime : String? = null
-
-    @ColumnInfo(name = "short_code")
-    private var shortCode: String? = null
 
     @ColumnInfo(name = "description")
     private var description : String? = null
@@ -45,28 +42,30 @@ public class Product(
         if (currentPrice != null && currentPrice!! < 0){
             throw Exception("Please check your given current price! It must greater than 0!!")
         }
-        if(tax != null && tax!! > 100u){
+        if(tax != null && tax!! > 100){
             throw Exception("Please check your given tax! It must smaller than 100!!")
+        }
+        if(tax != null && tax!! < 0){
+            throw Exception("Please check your given tax! It must greater than 0!!")
         }
     }
 
     constructor(
-        productCode: String, productName: String, tax : UByte,
+        productCode: String, productName: String, tax : Byte,
         salesUnitType: SalesUnitType, currentPrice: Double, inventoryDifference : Double )
             : this(productCode, productName, salesUnitType, currentPrice, tax){
                 this.inventoryDifference = inventoryDifference
     }
 
-    constructor(
-        productCode: String, productName: String, shortCode : String, tax : UByte,
-        salesUnitType: SalesUnitType, currentPrice: Double, description : String)
-            : this(productCode, productName, salesUnitType, currentPrice, tax) {
-            this.description = description
-        val shortCodeTrim = shortCode.trim()
-        if (ProductUtil.isShortCodeValid(shortCodeTrim)){
-            this.shortCode = shortCodeTrim
-        }
-    }
+    fun getInventoryDifference() : Double? {return this.inventoryDifference}
+
+    fun getProductId() : Int {return this.productId}
+
+    fun getLastInventoryDateAndTime() : String? {return this.lastProductInventoryDateAndTime}
+
+    fun getCurrentPrice() : Double? {return this.currentPrice}
+
+    fun getTax() : Byte? {return this.tax}
 
     fun setProductCode(productCode : String) : Boolean {
         val productCodeTrim = productCode.trim()

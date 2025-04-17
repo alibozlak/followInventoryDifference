@@ -2,10 +2,11 @@ package dev.bozlak.envantertakip.dal
 
 import androidx.room.Dao
 import androidx.room.Query
-import dev.bozlak.envantertakip.entities.products.ProductIdInventoryDifferenceAndDate
+import dev.bozlak.envantertakip.entities.products.Product
 
 @Dao
 interface ProductDao {
-    @Query("SELECT product_id, inventory_difference, last_product_inventory_date_and_time FROM products")
-    fun getAllProductIdInventoryDifferenceAndDate() : List<ProductIdInventoryDifferenceAndDate>
+    @Query("SELECT * FROM products")
+    fun getAllProducts() : List<Product>?
+
 }

@@ -13,6 +13,11 @@ class EventAffectingTheStore {
     @ColumnInfo(name = "product_id")
     private var productId : UInt = 0u
 
+    /**
+     * Can be negative or positive
+     * Negative value : Negative event for store
+     * Positive value : Positive event for store
+     */
     @ColumnInfo(name = "amount")
     private var amount : Double = 0.0
 
