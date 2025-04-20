@@ -2,8 +2,9 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     id ("androidx.navigation.safeargs.kotlin")
-    id("kotlin-kapt")
-    id("com.google.dagger.hilt.android")
+    id ("com.google.devtools.ksp")
+    //id("kotlin-kapt")
+    //id("com.google.dagger.hilt.android")
 }
 
 android {
@@ -53,7 +54,15 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
 
-    val nav_version = "2.7.7"
+    val fragment_version = "1.8.6"
+    // Kotlin
+    implementation("androidx.fragment:fragment-ktx:$fragment_version")
+    // Compose
+    implementation("androidx.fragment:fragment-compose:$fragment_version")
+    // Testing Fragments in Isolation
+    debugImplementation("androidx.fragment:fragment-testing:$fragment_version")
+
+    val nav_version = "2.8.9"
     // Navigation
     implementation("androidx.navigation:navigation-fragment-ktx:$nav_version")
     implementation("androidx.navigation:navigation-ui-ktx:$nav_version")
@@ -63,14 +72,15 @@ dependencies {
     implementation("androidx.room:room-runtime:$room_version")
     annotationProcessor ("androidx.room:room-compiler:$room_version")
     // To use Kotlin annotation processing tool (kapt)
+    ksp("androidx.room:room-compiler:$room_version")
 
     implementation ("androidx.room:room-rxjava3:$room_version")
     implementation ("io.reactivex.rxjava3:rxandroid:3.0.2")
 
-    implementation("com.google.dagger:hilt-android:2.51.1")
-    kapt("com.google.dagger:hilt-android-compiler:2.51.1")
+    //implementation("com.google.dagger:hilt-android:2.51.1")
+    //kapt("com.google.dagger:hilt-android-compiler:2.51.1")
 }
 
-kapt {
-    correctErrorTypes = true
-}
+//kapt {
+//    correctErrorTypes = true
+//}
